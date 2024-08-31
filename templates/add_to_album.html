@@ -1,0 +1,12 @@
+<form method="post" enctype="multipart/form-data">
+    {% if albums|length >=1 %}
+    {% for x in albums %}
+    <label for={{x.album_name}}>{{ x.album_name }}</label>
+    <input type="radio" name='album_name' value={{x.id}}>
+    {% endfor %}
+    {% else %}
+    <h1>Want to Create your first album</h1>
+    <input type="radio" value='yes' name="album_name">
+    {% endif %}
+    <button type="submit">Add song</button>
+</form>

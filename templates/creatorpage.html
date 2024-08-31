@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<head>
+  <title>Website Top Bar</title>
+  <style>
+    /* Basic styling for the top bar */
+    .top-bar {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: right;
+    }
+
+    /* Style for individual tabs */
+    .top-bar a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 15px;
+    }
+
+    /* Style for the active tab */
+    .top-bar a.active {
+      font-weight: bold;
+    }
+    .music-cards {
+      display: flex;
+      /* justify-content: space-around; */
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .music-card {
+      width: 130px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .music-card:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .music-details {
+      margin-top: 10px;
+    }
+
+    .song-title {
+      font-weight: bold;
+    }
+
+    .song-artist {
+      color: #777;
+    }
+
+    .song-album {
+      color: #555;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 300px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    
+  </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="/login/user">Logout</a>
+        <a href="/addsong">Add Song</a>
+        <a href="/homepage" class="active">User Account</a>
+        <!-- <a href="/homepage/{{ user_id }}" class="active">User Account</a> -->
+        <a href="#">Creator Account</a>
+
+      </div>
+
+    
+
+    <section>
+      <h2 align="center">Creator Stats</h2>
+  <table align="center">
+    <tr>
+      <th>Stats</th>
+      <th>Total Count</th>
+    </tr>
+    <tr>
+      <td>Total Uploads</td>
+      <!-- Placeholder value for total uploads -->
+      <td>{{ total_songs }}</td>
+    </tr>
+    <tr>
+      <td>Total Albums</td>
+      <!-- Placeholder value for total albums -->
+      <td>{{ total_albums }}</td>
+    </tr>
+    <tr>
+      <td>Total Ratings</td>
+      <!-- Placeholder value for total albums -->
+      <td>{{ total_ratings }}</td>
+    </tr>
+  </table>
+      <!-- Average Rating: {{ average_rating }} -->
+    </section>
+
+    <section>
+    <h2>Your Songs:</h2>
+
+    <div class="music-cards">
+        {% if songs|length >=1 %}
+        {% for x in songs %}
+        <div class="music-card">
+          <img src="" alt={{x.song_name}}>
+          <div class="music-details">
+            <p class="song-title">{{ x.song_name }}</p>
+            <p class="song-artist">{{ x.genre }}</p>
+            <p><a href="/listen_to/{{ x.id }}/creator/{{ cre_id }}/d">{{ x.song_name }}</a></p>
+            <p><a href="/update/song/{{ x.id }}">Update</a> | <a href="/delete/song/{{ x.id }}">Delete</a></p>
+            <!-- <p class="song-album">Album Name 1</p> -->
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <a href="/addsong">Add your first Song</a>
+        {% endif %}
+    </div>
+    </section>
+
+    <section>
+      {% if albums|length >=1 %}
+        <h4>Your Albums | <a href="/create_album">Create New Album</a></h4>
+        {% for x in albums %}
+        <h4><a href="#">{{ x.album_name }}</a> | <a href="/update/album/{{ x.id }}">Update Album</a> | <a href="/delete/album/{{ x.id }}">Delete</a></h4>
+        {% endfor %}
+        {% else %}
+        <h4><a href="/create_album">Create your first Album</a></h4>
+        {% endif %}
+    </section>
+
+    

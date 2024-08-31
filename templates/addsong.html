@@ -1,0 +1,15 @@
+<section>
+    <h4>Add a song</h4>
+    <form method="post" enctype="multipart/form-data" action="/addsong">
+        <label for="song_name">Song Name</label>
+        <input type="text" name="song_name" id="song_name">
+        <label for="song_lyrics">Song Lyrics</label>
+        <input type="text" name="song_lyrics" id="song_lyrics">
+        <label for="file">file</label>
+        <label for="genre">Genre</label>
+        <input type="text" name="genre" id="genre">
+        <input type="file" name="file" id="file" accept="audio/*">
+        <button type="submit">Add song</button>
+        
+    </form>
+</section>

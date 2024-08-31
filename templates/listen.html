@@ -1,0 +1,126 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>{{ music_name }}</title>
+</head>
+<body>
+    <h1>{{ music_name }}</h1>
+    <h2>{{ music_lyrics }}</h2>
+    <audio controls>
+        <source src="data:audio/mpeg;base64,{{ music_data }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <form method="get" action="/creator_account/{{ writer }}">
+        <button type="submit">Go Back</button>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Music Player with Lyrics and Details</title>
+  <style>
+    /* Basic styling for the music player */
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .music-details {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .song-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .artist-name {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .lyrics {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    audio {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="music-details">
+  <p class="song-title">{{ music_name }}</p>
+  {% if listener=="user" %}
+  <p>Rate this song: {{ average_rating }}</p>
+                  {% if way=="d" %}:
+                  <p>
+                    <a href="/rate_song/{{ music1 }}/1/d">1 - Poor</a> |
+                    <a href="/rate_song/{{ music1 }}/2/d">2 - Fair</a> |
+                    <a href="/rate_song/{{ music1 }}/3/d">3 - Average</a> |
+                    <a href="/rate_song/{{ music1 }}/4/d">4 - Good</a> |
+                    <a href="/rate_song/{{ music1 }}/5/d">5 - Excellent</a>
+                  </p>
+                  {% elif way=="i" %}
+                  <p>
+                    <a href="/rate_song/{{ music1 }}/1/i">1 - Poor</a> |
+                    <a href="/rate_song/{{ music1 }}/2/i">2 - Fair</a> |
+                    <a href="/rate_song/{{ music1 }}/3/i">3 - Average</a> |
+                    <a href="/rate_song/{{ music1 }}/4/i">4 - Good</a> |
+                    <a href="/rate_song/{{ music1 }}/5/i">5 - Excellent</a>
+                  </p>
+                  {% elif way=="iu" %}
+                  <p>
+                    <a href="/rate_song/{{ music1 }}/1/iu">1 - Poor</a> |
+                    <a href="/rate_song/{{ music1 }}/2/iu">2 - Fair</a> |
+                    <a href="/rate_song/{{ music1 }}/3/iu">3 - Average</a> |
+                    <a href="/rate_song/{{ music1 }}/4/iu">4 - Good</a> |
+                    <a href="/rate_song/{{ music1 }}/5/iu">5 - Excellent</a>
+                  </p>
+                {% endif %}
+
+  {% else %}
+  <p>Average Rating ={{ average_rating }}</p>
+  {% endif %}
+  <!-- <p class="artist-name">Artist Name</p> -->
+  <!-- <p class="music-writer">Music Writer: Writer's Name</p> -->
+</div>
+<audio controls>
+    <source src="data:audio/mpeg;base64,{{ music_data }}" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<div class="lyrics">
+  <h2>Lyrics</h2>
+  <p>
+    {{ music_lyrics }}
+  </p>
+</div>
+{% if listener=="creator" %}
+<form method="get" action="/creator_account">
+    <button type="submit">Go Back</button></form>
+    <form method="get" action="/add_to_album/{{ music1 }}">
+      <button type="submit">Add to album</button></form>
+{% else %}
+{% if way=="d" %}
+<form method="get" action="/homepage">
+    <button type="submit">Go Back</button>
+{% else %}
+{% if way=="iu" %}
+<form method="get" action="/songs_of/playlist/{{ playlist_id }}">
+    <button type="submit">Go Back</button>
+{% else %}
+<form method="get" action="/songs_of/writer/{{ writer }}">
+  <button type="submit">Go Back</button>
+{% endif %}
+{% endif %}
+{% endif %}

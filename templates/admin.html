@@ -1,0 +1,29 @@
+{% if login=='yes' %}
+<form method="post" action="/adm">
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="username" id="username">
+    <label for="password">password</label>
+    <input type="password" name="password" placeholder="password" id="password">
+    <button type="submit">Login</button> <a href="#"><button type="button">Register</button></a>
+</form>
+{% elif login=='wrong' %}
+<h2>Wrong password, try relogin</h2>
+<form method="post" action="/adm">
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="username" id="username">
+    <label for="password">password</label>
+    <input type="password" name="password" placeholder="password" id="password">
+    <button type="submit">Login</button> <a href="#"><button type="button">Register</button></a>
+</form>
+{% elif login=='nuf' %}
+<h2>No user found, first register</h2>
+<form method="post" action="/adm">
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="username" id="username">
+    <label for="password">password</label>
+    <input type="password" name="password" placeholder="password" id="password">
+    <button type="submit">Login</button> <a href="#"><button type="button">Register</button></a>
+</form>
+{% else %}
+
+

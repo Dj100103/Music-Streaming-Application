@@ -1,0 +1,46 @@
+{% if type=='songa'  %}
+    <form action="/update/song/{{ song.id }}" method="POST">
+        <label for="song_name">Song Name:</label>
+        <input type="text" id="song_name" name="song_name" value="{{ song.song_name }}"><br><br>
+
+        <label for="lyrics">Lyrics:</label><br>
+        <textarea id="lyrics" name="lyrics" rows="4" cols="50">{{ song.song_lyrics }}</textarea><br><br>
+
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre" value="{{ song.genre }}"><br><br>
+
+        <input type="submit" value="Update Song">
+    </form>
+{% elif type=="album" %}
+    <form method="post" enctype="multipart/form-data" action="/update/album/{{ album.id }}">
+        <label for="album_name">Album Name</label>
+        <input type="text" name="album_name" id="album_name" required>
+        <label for="song_name">Song name</label><br>
+        {% for x in songs %}
+        {% if x in songs_of_albums %}
+            <label for={{x.song_name}}>{{x.song_name}}</label>
+            <input type="checkbox" name='song_name' value={{x.id}} checked>
+        {% else %}
+            <label for={{x.song_name}}>{{x.song_name}}</label>
+            <input type="checkbox" name='song_name' value={{x.id}}>
+        {% endif %}
+        {% endfor %}
+        <button type="submit">Update Album</button>
+
+    </form>
+    {% else %}
+    <form method="post" enctype="multipart/form-data" action="/update/playlist/{{ playlist.id }}">
+        <label for="playlist_name">Playlist Name</label>
+        <input type="text" name="playlist_name" id="playlist_name" required>
+        <label for="song_name">Song name</label><br>
+        {% for x in songs %}
+        {% if x in songs_of_playlist %}
+            <label for={{x.song_name}}>{{x.song_name}}</label>
+            <input type="checkbox" name='song_name' value={{x.id}} checked>
+        {% else %}
+            <label for={{x.song_name}}>{{x.song_name}}</label>
+            <input type="checkbox" name='song_name' value={{x.id}}>
+        {% endif %}
+        {% endfor %}
+        <button type="submit">Update Playlist</button>
+{% endif %}

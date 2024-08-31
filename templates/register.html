@@ -1,0 +1,24 @@
+{% if type=="user" %}
+<form method="post">
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="username" id="username">
+    <label for="password">password</label>
+    <input type="password" name="password" placeholder="password" id="password">
+    <button type="submit">Register</button>
+</form>
+
+{% elif nuf=="True" %}
+<h2>No user Found, Kindly register</h2>
+<form method="post" action="/register">
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="username" id="username">
+    <label for="password">password</label>
+    <input type="password" name="password" placeholder="password" id="password">
+    <button type="submit">Register</button>
+
+{% elif type=="creator" %}
+<form method="post">
+    Name: <input type="text" placeholder="creator_name" name="creator_name">
+    <h2>are you sure you want to register as a creator?</h2>
+    <button type="submit">Yes</button>
+{% endif %}
